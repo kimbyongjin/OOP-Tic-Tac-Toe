@@ -39,14 +39,24 @@ class TicTacToe {
 
     // any other pre-game logic
     // any other post-game logic
-  };
+    this.win = false;
+    this.turnCount = 0;
+  }; // end constructor function
 
   // below are all of the methods for controlling the game
 
   // player making a move
   playerMove() {
     // after every move that a player has made, check for all end-game conditions
+    // increment turnCount
 
+    // check for row
+    // check for column
+    // check for diagonal
+    // check for draw => turnCount === 9 && win === false
+
+    // if win === false
+      // change player after all checks have been made
   };
 
   // method to alternate player move
@@ -57,10 +67,12 @@ class TicTacToe {
 
   // method to check win by row
   checkRow() { // to be called after every move
-    for (let row of this.board) {
-      if (row[0] !== ' ') {
-        if (row[0] === row[1] && row[0] === row[2]) {
-          this.handleGameWin();
+    if (!this.win) {
+      for (let i = 0; i < 3; i++) {
+        if (this.board[i][0] !== ' ') {
+          if (this.board[i][0] === this.board[i][1] && this.board[i][0] === this.board[i][2]) {
+            this.handleGameWin();
+          }
         }
       }
     }
@@ -72,10 +84,12 @@ class TicTacToe {
 
   // method to check win by column
   checkColumn() {
-    for (let i = 0; i < 3; i++) {
-      if (this.board[0][i] !== ' ') {
-        if (this.board[0][i] === this.board[1][i] && this.board[0][i] === this.board[2][i]) {
-          this.handleGameWin();
+    if (!this.win) {
+      for (let i = 0; i < 3; i++) {
+        if (this.board[0][i] !== ' ') {
+          if (this.board[0][i] === this.board[1][i] && this.board[0][i] === this.board[2][i]) {
+            this.handleGameWin();
+          }
         }
       }
     }
@@ -87,10 +101,11 @@ class TicTacToe {
 
   // method to check for win by diagonal
   checkDiagonal() {
-    if (this.board[1][1] !== ' ') {
-      if (this.board[0][0] === this.board[1][1] && this.board[0][0] === this.board[2][2]) {
-        this.handleGameWin(); // major diagonal
-      } else if (this.board[0][2] === this.board[1][1] && this.board[0][2] === this.board[2][0]) {
+    if (!this.win) {
+      if (this.board[1][1] !== ' ') {
+        if (this.board[0][0] === this.board[1][1] && this.board[0][0] === this.board[2][2]) {
+          this.handleGameWin(); // major diagonal
+        } else if (this.board[0][2] === this.board[1][1] && this.board[0][2] === this.board[2][0]) {
           this.handleGameWin(); // minor diagonal
         }
       }
@@ -100,9 +115,15 @@ class TicTacToe {
       // check for equality on both diagonal arangements
   }
 
+  checkDraw() {
+    if (!this.win && this.turnCount === 9) {
+      this.handleGameDraw();
+    }
+  }
+
   // method to update player win score upon game completion
   handleGameWin() {
-
+    this.win = true;
     // this function will be called when a game ending condition has been met except when game ends in a draw.
     // when a WINNING game condition has been met, call this function and increment the game-win counter
       // for that appropriate player.
@@ -111,7 +132,7 @@ class TicTacToe {
 
   // method for handling a game-end in a draw.
   handleGameDraw() {
-
+    this.handleGameOver();
     // method will be called when the game board has been filled AND no WINNING condition has been met
   }
 
