@@ -56,18 +56,29 @@ class TicTacToe {
   };
 
   // method to check win by row
-  checkRow() {
-
-    // to be called after every move
-      // Iterate through the board, check for strict equality between all values in each row.
-      // CAVEAT - Ensure that the checked value is not the default value for an empty board.
-        // this would result in a win for every game after the first move has been made
+  checkRow() { // to be called after every move
+    for (let row of this.board) {
+      if (row[0] !== ' ') {
+        if (row[0] === row[1] && row[0] === row[2]) {
+          this.handleGameWin();
+        }
+      }
+    }
+    // Iterate through the board, check for strict equality between all values in each row.
+    // CAVEAT - Ensure that the checked value is not the default value for an empty board.
+      // this would result in a win for every game after the first move has been made
   };
 
 
   // method to check win by column
   checkColumn() {
-
+    for (let i = 0; i < 3; i++) {
+      if (this.board[0][i] !== ' ') {
+        if (this.board[0][i] === this.board[1][i] && this.board[0][i] === this.board[2][i]) {
+          this.handleGameWin();
+        }
+      }
+    }
     // to be called after every move
     // Iterate through the board, check for strict equality between all values in each column.
       // CAVEAT - Ensure that the checked value is not the default value for an empty board.
@@ -76,7 +87,14 @@ class TicTacToe {
 
   // method to check for win by diagonal
   checkDiagonal() {
-
+    if (this.board[1][1] !== ' ') {
+      if (this.board[0][0] === this.board[1][1] && this.board[0][0] === this.board[2][2]) {
+        this.handleGameWin(); // major diagonal
+      } else if (this.board[0][2] === this.board[1][1] && this.board[0][2] === this.board[2][0]) {
+          this.handleGameWin(); // minor diagonal
+        }
+      }
+    }
     // major diagonal or minor diagonal
     // to be called after every move
       // check for equality on both diagonal arangements
