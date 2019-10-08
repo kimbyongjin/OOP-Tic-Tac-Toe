@@ -33,9 +33,10 @@ class TicTacToe {
     this.currentPlayer = 'x';
 
     // keep track of the game wins,
+    // each key represents a player and can be updated when a game is won selecting with this.currentPlayer
     this.score = {
-      'Player X': 0,
-      'Player O': 0,
+      'x': 0,
+      'o': 0,
     };
 
     // any other pre-game logic
@@ -52,6 +53,7 @@ class TicTacToe {
     // after every move that a player has made, check for all end-game conditions
     // increment turnCount
     this.board[row][col] = this.currentPlayer;
+    this.turnCount++;
 
     // check for row
     // check for column
@@ -136,8 +138,15 @@ class TicTacToe {
   }
 
   automaticGame() {
+    //  TODO: Ensure that no infinite loop will run -
+      // currently, a game will reset after completion and while loop will keep going
+      // must end game logic somehow.
+
+      // DO NOT CALL THIS METHOD YET
+
+
     // Automatic game resolution
-    if (this.autoGame) {
+    if (this.autoGame) { // possible unecessary game logic.
       let pos1 = randomPosition();
       let pos2 = randomPosition();
       while (this.board[pos1][pos2] !== ' ') {
