@@ -19,7 +19,8 @@ Game considerations:
 
 class TicTacToe {
   constructor () {
-    // inside of the constructor, all of these features will be instantiated as soon as the instance is invoked.
+    // inside of the constructor, all of these features will be instantiated as soon as the
+      // instance is invoked.
 
     // Construct the board.
     this.board = [
@@ -39,6 +40,7 @@ class TicTacToe {
 
     // any other pre-game logic
     // any other post-game logic
+    this.autoGame = false;
     this.win = false;
     this.turnCount = 0;
   }; // end constructor function
@@ -46,23 +48,35 @@ class TicTacToe {
   // below are all of the methods for controlling the game
 
   // player making a move
-  playerMove() {
+  playerMove(row, col) {
     // after every move that a player has made, check for all end-game conditions
     // increment turnCount
+    this.board[row][col] = this.currentPlayer;
 
     // check for row
     // check for column
     // check for diagonal
     // check for draw => turnCount === 9 && win === false
+    this.checkRow();
+    this.checkColumn();
+    this.checkDiagonal();
+    this.checkDraw();
 
     // if win === false
       // change player after all checks have been made
+    if (!this.win) {
+      this.changePlayer();
+    }
   };
 
   // method to alternate player move
   changePlayer() {
     // check the current player, reassign the player to the next.
-
+    if (this.currentPlayer === 'x') {
+      this.currentPlayer = 'o';
+    } else {
+      this.currentPlayer = 'x';
+    }
   };
 
   // method to check win by row
@@ -121,10 +135,28 @@ class TicTacToe {
     }
   }
 
+  automaticGame() {
+    // Automatic game resolution
+    if (this.autoGame) {
+      let pos1 = randomPosition();
+      let pos2 = randomPosition();
+      while (this.board[pos1][pos2] !== ' ') {
+        pos1 = this.randomPosition();
+        pos2 = this.randomPosition();
+      }
+      this.playerMove(pos1, pos2);
+    }
+  }
+
+  randomPosition() {
+    return Math.floor(Math.random() * 3);
+  }
+
   // method to update player win score upon game completion
   handleGameWin() {
     this.win = true;
-    // this function will be called when a game ending condition has been met except when game ends in a draw.
+    // this function will be called when a game ending condition has been met except when
+      // game ends in a draw.
     // when a WINNING game condition has been met, call this function and increment the game-win counter
       // for that appropriate player.
     // Decide whether winning a game should effect the first player's turn for the following game
@@ -140,7 +172,8 @@ class TicTacToe {
   handleGameOver() {
 
     // this method will be called when any end game condition has been met
-    // this should, after resolving all end-game functionality, reset the board and prepare for the next game.
+    // this should, after resolving all end-game functionality, reset the board and prepare
+      // for the next game.
   }
 
 };
