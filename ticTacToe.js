@@ -24,9 +24,9 @@ class TicTacToe {
 
     // Construct the board.
     this.board = [
-      [' ', ' ', ' '],
-      [' ', ' ', ' '],
-      [' ', ' ', ' '],
+      [' ', ' ', ' ',],
+      [' ', ' ', ' ',],
+      [' ', ' ', ' ',],
     ];
 
     // keep track of the player,
@@ -147,8 +147,8 @@ class TicTacToe {
 
     // Automatic game resolution
     if (this.autoGame) { // possible unecessary game logic.
-      let pos1 = randomPosition();
-      let pos2 = randomPosition();
+      let pos1 = this.randomPosition();
+      let pos2 = this.randomPosition();
       while (this.board[pos1][pos2] !== ' ') {
         pos1 = this.randomPosition();
         pos2 = this.randomPosition();
